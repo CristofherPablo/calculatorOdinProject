@@ -1,0 +1,1 @@
+A small project for Odin Project, create a calculator with CSS, HTML and Vanila JavaScript.
