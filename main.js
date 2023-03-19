@@ -4,15 +4,44 @@ var operation = null;
 var buttons = document.querySelectorAll(".buttons button");
 const mathOperations = ["*", "-", "+", "/"];
 
-function calculator(currentValue, previousValue, operation){
-  var mathOperation = previousValue.innerText[previousValue.innerText.length - 1];
-  console.log(mathOperation);
+function calculator(currentValue, previousValue, operation) {
+  //store the current operation and transform text into numbers with the + before the attribution
+  var mathOperation =
+    previousValue.innerText[previousValue.innerText.length - 1];
+  let previous = +previousValue.innerText.slice(0, -1);
+  let current = +currentValue.innerText;
+  let result;
+
+  switch (mathOperation) {
+    case "+":
+      result = previous + current;
+      previousValue.innerText = result + operation;
+      currentValue.innerText = "";
+      break;
+
+    case "-":
+      result = previous - current;
+      previousValue.innerText = result + operation;
+      currentValue.innerText = "";
+      break;
+
+    case "*":
+      result = previous * current;
+      previousValue.innerText = result + operation;
+      currentValue.innerText = "";
+      break;
+
+    case "/":
+      result = previous / current;
+      previousValue.innerText = result + operation;
+      currentValue.innerText = "";
+      break;
+  }
 }
 
 function displayNumber(value) {
   var currentValue = document.getElementsByClassName("currentValue")[0];
-  var previousValue =
-    document.getElementsByClassName("previousValue")[0];
+  var previousValue = document.getElementsByClassName("previousValue")[0];
 
   if (value >= 0) {
     //Changing the size of the font after a certain length of the string and limiting the string size to 14 numbers.
@@ -47,16 +76,13 @@ function displayNumber(value) {
         "previousValue"
       )[0].innerText = `${currentValue.innerText}${operation}`;
       currentValue.innerText = "";
-      
-    }else{
-
-      if(currentValue.innerText == ""){
-        document.getElementsByClassName(
-          "previousValue"
-        )[0].innerText = document.getElementsByClassName(
-          "previousValue"
-        )[0].innerText.slice(0, -1) + operation;
-      }else{
+    } else {
+      if (currentValue.innerText == "") {
+        document.getElementsByClassName("previousValue")[0].innerText =
+          document
+            .getElementsByClassName("previousValue")[0]
+            .innerText.slice(0, -1) + operation;
+      } else {
         calculator(currentValue, previousValue, operation);
       }
     }
