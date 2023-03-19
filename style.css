@@ -26,24 +26,38 @@ body {
     background-color: #038728;
     display: flex;
     flex-direction: column;
+    box-shadow: 5px 5px 13px 0px rgba(44, 44, 44, 0.15);
 }
 
 .display{
+    display: flex;
+    flex-direction: column;
+    height: 78px;
     background-color: #303134;
     color: #038728;
     padding: 1rem;
     border-top-right-radius:5px ;
     border-top-left-radius:5px ;
     margin-bottom: 0.3rem;
+    position: relative;
 }
 .display .previousValue{
+    justify-self: flex-start;
     font-size: large;
     text-align: end;
+    height: 21px;
+    line-height: 21px;
 }
 
 .display .currentValue{
+    padding-right: 5px;
+    height: 56px;
+    line-height: 56px;
     font-size: 5rem;
-    text-align: end;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    text-align: right;
     font-weight: bold;
 }
 
