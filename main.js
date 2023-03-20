@@ -113,6 +113,12 @@ function displayNumber(value) {
   } else if (value == "AC") {
     previousValue.innerText = "";
     currentValue.innerText = "";
+  } else if (value == "DEL"){
+    if(currentValue.innerText == ""){
+      return;
+    }else{
+      currentValue.innerText = currentValue.innerText.slice(0,currentValue.innerText.length-1);
+    }
   }
 }
 
