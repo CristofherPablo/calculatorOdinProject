@@ -9,8 +9,15 @@ function calculator(currentValue, previousValue, operation) {
   var mathOperation =
     previousValue.innerText[previousValue.innerText.length - 1];
   let previous = +previousValue.innerText.slice(0, -1);
-  let current = +currentValue.innerText;
+  let current;
   let result;
+
+  //verification if the current value is empty so the operation can be done by the previous values only
+  if (currentValue.innerText == "") {
+    current = +previousValue.innerText.slice(0, -1);
+  } else {
+    current = +currentValue.innerText;
+  }
 
   switch (mathOperation) {
     case "+":
@@ -36,6 +43,8 @@ function calculator(currentValue, previousValue, operation) {
       previousValue.innerText = result + operation;
       currentValue.innerText = "";
       break;
+    default:
+      return;
   }
 }
 
@@ -71,7 +80,10 @@ function displayNumber(value) {
     return;
   } else if (mathOperations.includes(value)) {
     operation = value;
-    if (previousValue.innerText == "") {
+
+    if (previousValue.innerText == "" && currentValue.innerText == "") {
+      return;
+    } else if (previousValue.innerText == "") {
       document.getElementsByClassName(
         "previousValue"
       )[0].innerText = `${currentValue.innerText}${operation}`;
@@ -86,6 +98,21 @@ function displayNumber(value) {
         calculator(currentValue, previousValue, operation);
       }
     }
+  } else if (value == "=") {
+    if (currentValue.innerText == "" && previousValue.innerText == "") {
+      return;
+    } else if (previousValue.innerText == "") {
+      return;
+    } else if (currentValue.innerText != "" && previousValue.innerText != "") {
+      operation = previousValue.innerText[previousValue.innerText.length - 1];
+      calculator(currentValue, previousValue, operation);
+    } else {
+      operation = previousValue.innerText[previousValue.innerText.length - 1];
+      calculator(currentValue, previousValue, operation);
+    }
+  } else if (value == "AC") {
+    previousValue.innerText = "";
+    currentValue.innerText = "";
   }
 }
 
