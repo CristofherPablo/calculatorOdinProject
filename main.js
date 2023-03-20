@@ -39,7 +39,7 @@ function calculator(currentValue, previousValue, operation) {
       break;
 
     case "/":
-      if (previousValue.innerText === "0" || currentValue.innerText === "0") {
+      if (previous === 0 || current === 0) {
         break;
       }
       result = previous / current;
