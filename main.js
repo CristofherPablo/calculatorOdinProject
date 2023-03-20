@@ -39,6 +39,9 @@ function calculator(currentValue, previousValue, operation) {
       break;
 
     case "/":
+      if (previousValue.innerText === "0" || currentValue.innerText === "0") {
+        break;
+      }
       result = previous / current;
       previousValue.innerText = result + operation;
       currentValue.innerText = "";
@@ -80,16 +83,15 @@ function displayNumber(value) {
     return;
   } else if (mathOperations.includes(value)) {
     operation = value;
-
-    if (previousValue.innerText == "" && currentValue.innerText == "") {
+    if (previousValue.innerText === "" && currentValue.innerText === "") {
       return;
-    } else if (previousValue.innerText == "") {
+    } else if (previousValue.innerText === "") {
       document.getElementsByClassName(
         "previousValue"
       )[0].innerText = `${currentValue.innerText}${operation}`;
       currentValue.innerText = "";
     } else {
-      if (currentValue.innerText == "") {
+      if (currentValue.innerText === "") {
         document.getElementsByClassName("previousValue")[0].innerText =
           document
             .getElementsByClassName("previousValue")[0]
@@ -98,10 +100,10 @@ function displayNumber(value) {
         calculator(currentValue, previousValue, operation);
       }
     }
-  } else if (value == "=") {
-    if (currentValue.innerText == "" && previousValue.innerText == "") {
+  } else if (value === "=") {
+    if (currentValue.innerText === "" && previousValue.innerText === "") {
       return;
-    } else if (previousValue.innerText == "") {
+    } else if (previousValue.innerText === "") {
       return;
     } else if (currentValue.innerText != "" && previousValue.innerText != "") {
       operation = previousValue.innerText[previousValue.innerText.length - 1];
@@ -110,14 +112,17 @@ function displayNumber(value) {
       operation = previousValue.innerText[previousValue.innerText.length - 1];
       calculator(currentValue, previousValue, operation);
     }
-  } else if (value == "AC") {
+  } else if (value === "AC") {
     previousValue.innerText = "";
     currentValue.innerText = "";
-  } else if (value == "DEL"){
-    if(currentValue.innerText == ""){
+  } else if (value === "DEL") {
+    if (currentValue.innerText === "") {
       return;
-    }else{
-      currentValue.innerText = currentValue.innerText.slice(0,currentValue.innerText.length-1);
+    } else {
+      currentValue.innerText = currentValue.innerText.slice(
+        0,
+        currentValue.innerText.length - 1
+      );
     }
   }
 }
